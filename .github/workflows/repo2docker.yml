@@ -21,14 +21,22 @@ jobs:
       env:
         REPO_TOKEN: ${{ secrets.PAT }}
 
-    - name: build & push container
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v2
+
+    - name: build container
       run: |
+        # build container with repo2docker
         pip install jupyter-repo2docker
         image_name_base="containers.pkg.github.com/$GITHUB_ACTOR/repo2docker"
         image_name_sha="$image_name_base:$GITHUB_SHA"
         image_name_latest="$image_name_base:latest"
         jupyter-repo2docker --no-run --image-name "$image_name_sha" .
+
+        # push container to the GitHub container registry
         docker tag $image_name_sha $image_name_latest
         echo "Built image: $image_name_sha"
         docker push $image_name_sha
         docker push $image_name_latest
+
+  
