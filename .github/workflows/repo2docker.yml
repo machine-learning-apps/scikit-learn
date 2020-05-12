@@ -1,0 +1,28 @@
+name: repo2docker
+on: push
+
+jobs:     
+  repo2docker:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Copy Repository Contents
+      uses: actions/checkout@master
+      with:
+        persist-credentials: false
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.6'
+
+    - name: login to docker
+      run: |
+        echo $GITHUB_TOKEN | docker login https://docker.pkg.github.com -u "github-actions[bot]" --password-stdin
+
+    - name: build container
+      run: |
+        pip install jupyter-repo2docker
+        jupyter-repo2docker --no-run --debug .
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v2
