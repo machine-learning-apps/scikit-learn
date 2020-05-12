@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Copy Repository Contents
+    - name: Copy Repo Contents
       uses: actions/checkout@master
       with:
         persist-credentials: false
