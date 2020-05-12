@@ -17,9 +17,9 @@ jobs:
 
     - name: login to docker
       run: |
-        echo $REPO_TOKEN | docker login https://docker.pkg.github.com -u "github-actions[bot]" --password-stdin
+        echo {{ secrets.PAT }} | docker login containers.pkg.github.com -u $GITHUB_ACTOR --password-stdin
       env:
-        REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_TOKEN: ${{ secrets.PAT }}
 
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v2
@@ -29,7 +29,7 @@ jobs:
     - name: build & push container
       run: |
         pip install jupyter-repo2docker
-        image_name_base="containers.pkg.github.com/repo2docker"
+        image_name_base="containers.pkg.github.com/$GITHUB_ACTOR/repo2docker"
         image_name_sha="$image_name_base:$GITHUB_SHA"
         image_name_latest="$image_name_base:latest"
         jupyter-repo2docker --no-run --debug --image-name "$image_name_sha" .
