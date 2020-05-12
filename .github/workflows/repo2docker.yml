@@ -27,8 +27,8 @@ jobs:
         image_name_base="containers.pkg.github.com/$GITHUB_ACTOR/repo2docker"
         image_name_sha="$image_name_base:$GITHUB_SHA"
         image_name_latest="$image_name_base:latest"
-        jupyter-repo2docker --no-run --debug --image-name "$image_name_sha" .
-        docker tag $image_name_full $image_name_latest
+        jupyter-repo2docker --no-run --image-name "$image_name_sha" .
+        docker tag $image_name_sha $image_name_latest
         echo "Built image: $image_name_sha"
         docker push $image_name_sha
         docker push $image_name_latest
