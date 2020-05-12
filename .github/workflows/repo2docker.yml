@@ -15,6 +15,9 @@ jobs:
       with:
         python-version: '3.6'
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v2
+      
     - name: login to docker
       run: |
         echo $GITHUB_TOKEN | docker login https://docker.pkg.github.com -u "github-actions[bot]" --password-stdin
@@ -23,6 +26,3 @@ jobs:
       run: |
         pip install jupyter-repo2docker
         jupyter-repo2docker --no-run --debug .
-
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v2
