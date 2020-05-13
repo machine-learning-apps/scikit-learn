@@ -21,7 +21,7 @@ jobs:
       env:
         REPO_TOKEN: ${{ secrets.PAT }}
 
-    - name: test gcr 1
+    - name: test gcr simple
       run: |
         # build container with repo2docker
         docker pull alpine:3.10 
