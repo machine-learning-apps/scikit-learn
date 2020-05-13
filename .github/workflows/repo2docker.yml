@@ -17,9 +17,9 @@ jobs:
 
     - name: login to docker
       run: |
-        echo {{ secrets.PAT3 }} | docker login containers.pkg.github.com -u $GITHUB_ACTOR --password-stdin
+        echo {{ secrets.PAT }} | docker login containers.pkg.github.com -u $GITHUB_ACTOR --password-stdin
       env:
-        REPO_TOKEN: ${{ secrets.PAT3 }}
+        REPO_TOKEN: ${{ secrets.PAT }}
 
     - name: build container
       run: |
