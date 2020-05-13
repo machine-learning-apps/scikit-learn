@@ -21,7 +21,14 @@ jobs:
       env:
         REPO_TOKEN: ${{ secrets.PAT }}
 
-    - name: build container
+    - name: test gcr 1
+      run: |
+        # build container with repo2docker
+        docker pull alpine:3.10 
+        docker tag alpine:3.10 containers.pkg.github.com/hamelsmu/repo2docker_test
+        docker push containers.pkg.github.com/hamelsmu/repo2docker_test
+
+    - name: test gcr 2
       run: |
         # build container with repo2docker
         pip install jupyter-repo2docker
