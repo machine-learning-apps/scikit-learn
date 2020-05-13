@@ -38,5 +38,3 @@ jobs:
         echo "Built image: $image_name_sha"
         docker push $image_name_sha
         docker push $image_name_latest
-
-  
