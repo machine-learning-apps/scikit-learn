@@ -30,7 +30,6 @@ jobs:
         image_name_latest="$image_name_base:latest"
         jupyter-repo2docker --no-run --image-name "$image_name_sha" .
         docker images
-
         # push container to the GitHub container registry
         docker tag $image_name_sha $image_name_latest
         echo "Built image: $image_name_sha"
