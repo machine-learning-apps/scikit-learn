@@ -25,8 +25,9 @@ jobs:
       run: |
         # build container with repo2docker
         docker pull alpine:3.10 
-        docker tag alpine:3.10 containers.pkg.github.com/hamelsmu/repo2docker_test
+        docker tag alpine:3.10 hamelsmu/repo2docker_test_gcr
         docker push hamelsmu/repo2docker_test_gcr
+        # containers.pkg.github.com/
 
     - name: test gcr 2
       run: |
